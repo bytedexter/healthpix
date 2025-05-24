@@ -15,7 +15,10 @@ const allowedOrigins = [
   'http://localhost:5173',
   'https://healthpix-frontend.vercel.app', // Your Vercel URL (will be updated once deployed)
   'https://healthpix-frontend-git-main.vercel.app', // Alternative Vercel URL
-  'https://healthpix-frontend-skdas20.vercel.app' // User-specific Vercel URL
+  'https://healthpix-frontend-skdas20.vercel.app', // User-specific Vercel URL
+  'https://healthpix.netlify.app', // Netlify URL
+  'https://healthpix-platform.netlify.app', // Alternative Netlify URL
+  'https://amazing-biscuit-*.netlify.app' // Netlify auto-generated URL pattern
 ];
 
 app.use(cors({
