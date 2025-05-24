@@ -234,7 +234,7 @@ function Home() {
     const fetchMedicines = async () => {
       try {
         setLoading(true); // Ensure loading is true at the start
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://healthpix-backend.onrender.com';
         const response = await fetch(`${apiUrl}/api/medicines`);
         if (!response.ok) {
           throw new Error('Failed to fetch medicines');
