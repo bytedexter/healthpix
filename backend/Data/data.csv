@@ -1,0 +1,101 @@
+Medicine Type,Medicine name,Dosage,Composition
+Ointment,Omeprazole,5 mg,Ciprofloxacin 5 mg
+Tablet,Ascoril,3 ml,Acetylsalicylic Acid 3 ml
+Syrup,Amoxicillin,100 ml,Ibuprofen 100 ml
+Tablet,Insulin,10 mg,Azithromycin 10 mg
+Syrup,Amoxicillin,10 ml,Pantoprazole 10 ml
+Capsule,Levocetirizine,250 mg,Levocetirizine Dihydrochloride 250 mg
+Injection,Pantoprazole,250 mg,Bromhexine + Guaiphenesin + Terbutaline 250 mg
+Drops,Levocetirizine,3 ml,Diphenhydramine HCl + Ammonium Chloride 3 ml
+Drops,Pantoprazole,500 mg,Azithromycin 500 mg
+Capsule,Loperamide,100 mg,Amoxicillin Trihydrate 100 mg
+Tablet,Cetirizine,100 ml,Ciprofloxacin 100 ml
+Capsule,Metformin,5 mg,Ibuprofen 5 mg
+Tablet,Ranitidine,1000 mg,Bromhexine + Guaiphenesin + Terbutaline 1000 mg
+Injection,Dolo,3 ml,Levocetirizine Dihydrochloride 3 ml
+Capsule,Paracetamol,3 ml,Diphenhydramine HCl + Ammonium Chloride 3 ml
+Capsule,Levocetirizine,5 mg,Pantoprazole 5 mg
+Ointment,Ciprofloxacin,75 mg,Ranitidine 75 mg
+Drops,Loperamide,50 mg,Cetirizine Dihydrochloride 50 mg
+Syrup,Insulin,3 ml,Ranitidine 3 ml
+Capsule,Omeprazole,1000 mg,Ciprofloxacin 1000 mg
+Injection,Ciprofloxacin,5 mg,Loperamide Hydrochloride 5 mg
+Capsule,Aspirin,1000 mg,Amoxicillin Trihydrate 1000 mg
+Tablet,Paracetamol,500 mg,Levocetirizine Dihydrochloride 500 mg
+Ointment,Ciprofloxacin,50 mg,Azithromycin 50 mg
+Drops,Aspirin,5 mg,Bromhexine + Guaiphenesin + Terbutaline 5 mg
+Ointment,Aspirin,75 mg,Acetylsalicylic Acid 75 mg
+Ointment,Metformin,10 ml,Diclofenac Sodium 10 ml
+Ointment,Pantoprazole,50 mg,Domperidone 50 mg
+Tablet,Ascoril,10 mg,Paracetamol 10 mg
+Syrup,Domperidone,3 ml,Ondansetron Hydrochloride 3 ml
+Ointment,Insulin,100 mg,Acetylsalicylic Acid 100 mg
+Syrup,Insulin,500 mg,Diphenhydramine HCl + Ammonium Chloride 500 mg
+Drops,Azithromycin,75 mg,Ranitidine 75 mg
+Ointment,Omeprazole,1000 mg,Azithromycin 1000 mg
+Tablet,Ranitidine,10 mg,Paracetamol 10 mg
+Capsule,Loperamide,10 ml,Insulin Human 10 ml
+Tablet,Diclofenac,1000 mg,Amoxicillin Trihydrate 1000 mg
+Injection,Ranitidine,1000 mg,Cetirizine Dihydrochloride 1000 mg
+Ointment,Dolo,250 mg,Ondansetron Hydrochloride 250 mg
+Capsule,Levocetirizine,5 mg,Acetylsalicylic Acid 5 mg
+Ointment,Ciprofloxacin,250 mg,Amoxicillin Trihydrate 250 mg
+Tablet,Amoxicillin,10 ml,Diphenhydramine HCl + Ammonium Chloride 10 ml
+Ointment,Omeprazole,50 mg,Bromhexine + Guaiphenesin + Terbutaline 50 mg
+Injection,Azithromycin,3 ml,Diclofenac Sodium 3 ml
+Drops,Metformin,100 mg,Loperamide Hydrochloride 100 mg
+Ointment,Metformin,10 ml,Omeprazole 10 ml
+Injection,Omeprazole,100 ml,Cetirizine Dihydrochloride 100 ml
+Capsule,Insulin,75 mg,Domperidone 75 mg
+Syrup,Ranitidine,10 ml,Paracetamol 10 ml
+Ointment,Ranitidine,100 mg,Bromhexine + Guaiphenesin + Terbutaline 100 mg
+Drops,Benadryl,75 mg,Levocetirizine Dihydrochloride 75 mg
+Ointment,Amoxicillin,20 mg,Domperidone 20 mg
+Ointment,Insulin,250 mg,Diclofenac Sodium 250 mg
+Injection,Metformin,75 mg,Acetylsalicylic Acid 75 mg
+Drops,Omeprazole,75 mg,Ciprofloxacin 75 mg
+Capsule,Ciprofloxacin,250 mg,Domperidone 250 mg
+Tablet,Domperidone,75 mg,Diphenhydramine HCl + Ammonium Chloride 75 mg
+Injection,Dolo,100 mg,Paracetamol 100 mg
+Syrup,Domperidone,5 mg,Diclofenac Sodium 5 mg
+Ointment,Ibuprofen,100 mg,Ciprofloxacin 100 mg
+Tablet,Cetirizine,250 mg,Diphenhydramine HCl + Ammonium Chloride 250 mg
+Capsule,Domperidone,10 ml,Diphenhydramine HCl + Ammonium Chloride 10 ml
+Ointment,Aspirin,100 mg,Cetirizine Dihydrochloride 100 mg
+Tablet,Ondansetron,100 ml,Diphenhydramine HCl + Ammonium Chloride 100 ml
+Syrup,Loperamide,500 mg,Insulin Human 500 mg
+Capsule,Loperamide,500 mg,Levocetirizine Dihydrochloride 500 mg
+Capsule,Benadryl,10 ml,Levocetirizine Dihydrochloride 10 ml
+Ointment,Levocetirizine,5 mg,Ondansetron Hydrochloride 5 mg
+Capsule,Ranitidine,50 mg,Loperamide Hydrochloride 50 mg
+Ointment,Ranitidine,3 ml,Diphenhydramine HCl + Ammonium Chloride 3 ml
+Ointment,Paracetamol,20 mg,Ibuprofen 20 mg
+Drops,Aspirin,1000 mg,Ciprofloxacin 1000 mg
+Syrup,Ascoril,1000 mg,Omeprazole 1000 mg
+Drops,Aspirin,10 mg,Levocetirizine Dihydrochloride 10 mg
+Ointment,Ascoril,75 mg,Paracetamol 75 mg
+Ointment,Insulin,500 mg,Paracetamol 500 mg
+Ointment,Domperidone,500 mg,Cetirizine Dihydrochloride 500 mg
+Capsule,Benadryl,100 ml,Bromhexine + Guaiphenesin + Terbutaline 100 ml
+Capsule,Metformin,100 ml,Levocetirizine Dihydrochloride 100 ml
+Tablet,Metformin,20 mg,Cetirizine Dihydrochloride 20 mg
+Ointment,Ibuprofen,20 mg,Pantoprazole 20 mg
+Capsule,Dolo,250 mg,Diclofenac Sodium 250 mg
+Drops,Dolo,20 mg,Diphenhydramine HCl + Ammonium Chloride 20 mg
+Drops,Ondansetron,1000 mg,Bromhexine + Guaiphenesin + Terbutaline 1000 mg
+Injection,Dolo,20 mg,Insulin Human 20 mg
+Syrup,Paracetamol,3 ml,Metformin Hydrochloride 3 ml
+Capsule,Dolo,100 ml,Ranitidine 100 ml
+Tablet,Ondansetron,100 ml,Paracetamol 100 ml
+Drops,Diclofenac,250 mg,Ranitidine 250 mg
+Injection,Paracetamol,100 mg,Azithromycin 100 mg
+Syrup,Azithromycin,10 ml,Ranitidine 10 ml
+Ointment,Diclofenac,10 ml,Metformin Hydrochloride 10 ml
+Syrup,Loperamide,10 mg,Acetylsalicylic Acid 10 mg
+Syrup,Ibuprofen,5 mg,Bromhexine + Guaiphenesin + Terbutaline 5 mg
+Syrup,Levocetirizine,3 ml,Insulin Human 3 ml
+Tablet,Ciprofloxacin,100 mg,Ranitidine 100 mg
+Injection,Ondansetron,5 mg,Amoxicillin Trihydrate 5 mg
+Syrup,Insulin,75 mg,Diclofenac Sodium 75 mg
+Injection,Amoxicillin,5 mg,Bromhexine + Guaiphenesin + Terbutaline 5 mg
+Capsule,Benadryl,5 mg,Diphenhydramine HCl + Ammonium Chloride 5 mg
