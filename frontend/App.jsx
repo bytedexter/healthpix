@@ -9,12 +9,12 @@ import LoadingScreen from "./LoadingScreen";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDF3FBk30I4y1UfRvAB0nnOfOfiZnDfhPk",
-  authDomain: "healthpix-63617.firebaseapp.com",
-  projectId: "healthpix-63617",
-  storageBucket: "healthpix-63617.appspot.com",
-  messagingSenderId: "275934394685",
-  appId: "1:275934394685:web:YOUR_APP_ID"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDF3FBk30I4y1UfRvAB0nnOfOfiZnDfhPk",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "healthpix-63617.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "healthpix-63617",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "healthpix-63617.appspot.com",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "275934394685",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:275934394685:web:YOUR_APP_ID"
 };
 
 // Initialize Firebase

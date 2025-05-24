@@ -229,13 +229,13 @@ function Home() {
       color: '#ff9800',
     },
   ];
-
   // Fetch medicines data when component mounts
   useEffect(() => {
     const fetchMedicines = async () => {
       try {
         setLoading(true); // Ensure loading is true at the start
-        const response = await fetch('http://localhost:5000/api/medicines');
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const response = await fetch(`${apiUrl}/api/medicines`);
         if (!response.ok) {
           throw new Error('Failed to fetch medicines');
         }
