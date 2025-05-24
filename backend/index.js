@@ -13,8 +13,9 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://healthpix-frontend-xxxx.vercel.app', // Replace with your actual Vercel URL
-  'https://your-custom-domain.com' // Add your custom domain if you have one
+  'https://healthpix-frontend.vercel.app', // Your Vercel URL (will be updated once deployed)
+  'https://healthpix-frontend-git-main.vercel.app', // Alternative Vercel URL
+  'https://healthpix-frontend-skdas20.vercel.app' // User-specific Vercel URL
 ];
 
 app.use(cors({
