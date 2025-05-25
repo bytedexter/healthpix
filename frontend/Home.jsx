@@ -182,7 +182,7 @@ function Home() {
   const [analysisError, setAnalysisError] = useState('');  // Sample slider images - replace with your actual images
   const sliderImages = [
     {
-      url: './health.png',
+      url: '/health.png',
       title: 'Your Trusted Healthcare Partner',
       subtitle: 'Quality medications delivered to your doorstep',
     },
@@ -192,7 +192,7 @@ function Home() {
       subtitle: 'Get professional advice for your medication needs',
     },
     {
-      url: './clinic.png',
+      url: '/clinic.png',
       title: '24/7 Healthcare Support',
       subtitle: 'We\'re here for you anytime, anywhere',
     },
