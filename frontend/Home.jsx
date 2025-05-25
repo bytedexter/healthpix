@@ -530,23 +530,86 @@ function Home() {
             </Box>
           </CardContent>
           <Box sx={{ p: 2, pt: 0 }}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => addToCart(medicine)}
-              disabled={medicine.stock === 0 || cart.some(item => item.id === (medicine.id || medicine['Medicine name']))}
-              sx={{
-                borderRadius: 2,
-                py: 1,
-                boxShadow: 2,
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                  transition: 'transform 0.2s'
-                }
-              }}
-            >
-              {cart.some(item => item.id === (medicine.id || medicine['Medicine name'])) ? 'Added to Cart' : 'Add to Cart'}
-            </Button>
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center',
+              gap: 1 
+            }}>
+              <Button
+                sx={{
+                  borderRadius: 2,
+                  py: 1,
+                  flexGrow: 1,
+                  boxShadow: 2,
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                    transition: 'transform 0.2s'
+                  }
+                }}
+                variant="contained"
+                onClick={() => addToCart(medicine)}
+                disabled={medicine.stock === 0 || cart.some(item => item.id === (medicine.id || medicine['Medicine name']))}
+              >
+                {cart.some(item => item.id === (medicine.id || medicine['Medicine name'])) ? 'Added to Cart' : 'Add to Cart'}
+              </Button>
+              {cart.some(item => item.id === (medicine.id || medicine['Medicine name'])) && (
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center',
+                  gap: 1
+                }}>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      const item = cart.find(i => i.id === (medicine.id || medicine['Medicine name']));
+                      if (item) updateQuantity(item.id, item.quantity - 1);
+                    }}
+                    sx={{ 
+                      border: '1px solid',
+                      borderColor: 'primary.main',
+                      color: 'primary.main',
+                      borderRadius: '50%',
+                      width: 32,
+                      height: 32,
+                      '&:hover': {
+                        backgroundColor: 'primary.main',
+                        color: 'white'
+                      }
+                    }}
+                  >
+                    -
+                  </IconButton>
+                  <Typography sx={{ 
+                    minWidth: 24, 
+                    textAlign: 'center',
+                    fontWeight: 'medium' 
+                  }}>
+                    {cart.find(item => item.id === (medicine.id || medicine['Medicine name']))?.quantity || 0}
+                  </Typography>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      const item = cart.find(i => i.id === (medicine.id || medicine['Medicine name']));
+                      if (item) updateQuantity(item.id, item.quantity + 1);
+                    }}
+                    sx={{ 
+                      border: '1px solid',
+                      borderColor: 'primary.main',
+                      color: 'primary.main',
+                      borderRadius: '50%',
+                      width: 32,
+                      height: 32,
+                      '&:hover': {
+                        backgroundColor: 'primary.main',
+                        color: 'white'
+                      }
+                    }}
+                  >
+                    +
+                  </IconButton>
+                </Box>
+              )}
+            </Box>
           </Box>
         </Card>
       </Grid>
@@ -888,7 +951,8 @@ function Home() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>          <Box 
+          </IconButton>
+          <Box 
             sx={{ 
               display: { xs: 'none', sm: 'flex' },
               alignItems: 'center',
@@ -914,6 +978,72 @@ function Home() {
             >
               Clinicado
             </Typography>
+          </Box>
+
+          {/* Add these navigation elements */}
+          <Box sx={{ 
+            display: { xs: 'none', md: 'flex' }, 
+            gap: 3, 
+            ml: 4,
+            mr: 2,
+            alignItems: 'center' 
+          }}>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('home')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <DashboardIcon sx={{ fontSize: 20 }} />
+              Home
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('medicines')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <MedicineIcon sx={{ fontSize: 20 }} />
+              Medicines
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('categories')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <CategoryIcon sx={{ fontSize: 20 }} />
+              Categories
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('history')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <HistoryIcon sx={{ fontSize: 20 }} />
+              Orders
+            </Button>
           </Box>
 
           <Search sx={{ 
@@ -984,28 +1114,6 @@ function Home() {
             <PersonIcon sx={{ color: 'primary.main' }} />
           </IconButton>
         </Toolbar>
-        
-        {/* Optional: Navigation tabs */}
-        <Tabs 
-          value={currentView === 'home' ? 0 : currentView === 'medicines' ? 1 : currentView === 'categories' ? 2 : 3}
-          onChange={(e, newValue) => {
-            setCurrentView(newValue === 0 ? 'home' : newValue === 1 ? 'medicines' : newValue === 2 ? 'categories' : 'history');
-          }}
-          sx={{ 
-            bgcolor: '#f8f9fa',
-            '& .MuiTab-root': { 
-              textTransform: 'none',
-              fontWeight: 500,
-              fontSize: '0.9rem'
-            }
-          }}
-          centered
-        >
-          <Tab label="Home" icon={<DashboardIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Medicines" icon={<MedicineIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Categories" icon={<CategoryIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Order History" icon={<HistoryIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-        </Tabs>
       </AppBar>
 
       {/* Add toolbar spacing */}
