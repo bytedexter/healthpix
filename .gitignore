@@ -33,3 +33,6 @@ Thumbs.db
 
 # Miscellaneous
 *.tgz
+
+# Local Netlify folder
+.netlify
