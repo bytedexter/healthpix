@@ -2,7 +2,19 @@
   "name": "healthpix-frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "a medicine ordering platoform",
+  "homepage": "https://github.com/bytedexter/healthpix#readme",
+  "bugs": {
+    "url": "https://github.com/bytedexter/healthpix/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bytedexter/healthpix.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "vite.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

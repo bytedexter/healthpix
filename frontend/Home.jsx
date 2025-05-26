@@ -526,9 +526,9 @@ function Home() {
               </Typography>
               <Typography variant="body2" color={medicine.stock > 0 ? 'success.main' : 'error.main'}>
                 {medicine.stock > 0 ? `In Stock: ${medicine.stock}` : 'Out of Stock'}
-              </Typography>
-            </Box>
-          </CardContent>          <Box sx={{ p: 2, pt: 0 }}>
+              </Typography>            </Box>
+          </CardContent>
+          <Box sx={{ p: 2, pt: 0 }}>
             {(() => {
               const medicineId = medicine.id || medicine['Medicine name'];
               const cartItem = cart.find(item => item.id === medicineId);
@@ -970,7 +970,8 @@ function Home() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>          <Box 
+          </IconButton>
+          <Box 
             sx={{ 
               display: { xs: 'none', sm: 'flex' },
               alignItems: 'center',
@@ -996,6 +997,72 @@ function Home() {
             >
               Clinicado
             </Typography>
+          </Box>
+
+          {/* Add these navigation elements */}
+          <Box sx={{ 
+            display: { xs: 'none', md: 'flex' }, 
+            gap: 3, 
+            ml: 4,
+            mr: 2,
+            alignItems: 'center' 
+          }}>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('home')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <DashboardIcon sx={{ fontSize: 20 }} />
+              Home
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('medicines')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <MedicineIcon sx={{ fontSize: 20 }} />
+              Medicines
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('categories')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <CategoryIcon sx={{ fontSize: 20 }} />
+              Categories
+            </Button>
+            <Button 
+              color="inherit" 
+              onClick={() => setCurrentView('history')}
+              sx={{ 
+                color: 'text.primary', 
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <HistoryIcon sx={{ fontSize: 20 }} />
+              Orders
+            </Button>
           </Box>
 
           <Search sx={{ 
@@ -1066,28 +1133,6 @@ function Home() {
             <PersonIcon sx={{ color: 'primary.main' }} />
           </IconButton>
         </Toolbar>
-        
-        {/* Optional: Navigation tabs */}
-        <Tabs 
-          value={currentView === 'home' ? 0 : currentView === 'medicines' ? 1 : currentView === 'categories' ? 2 : 3}
-          onChange={(e, newValue) => {
-            setCurrentView(newValue === 0 ? 'home' : newValue === 1 ? 'medicines' : newValue === 2 ? 'categories' : 'history');
-          }}
-          sx={{ 
-            bgcolor: '#f8f9fa',
-            '& .MuiTab-root': { 
-              textTransform: 'none',
-              fontWeight: 500,
-              fontSize: '0.9rem'
-            }
-          }}
-          centered
-        >
-          <Tab label="Home" icon={<DashboardIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Medicines" icon={<MedicineIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Categories" icon={<CategoryIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-          <Tab label="Order History" icon={<HistoryIcon sx={{ fontSize: 20 }} />} iconPosition="start" />
-        </Tabs>
       </AppBar>
 
       {/* Add toolbar spacing */}
