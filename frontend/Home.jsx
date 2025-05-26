@@ -528,25 +528,107 @@ function Home() {
                 {medicine.stock > 0 ? `In Stock: ${medicine.stock}` : 'Out of Stock'}
               </Typography>
             </Box>
-          </CardContent>
-          <Box sx={{ p: 2, pt: 0 }}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => addToCart(medicine)}
-              disabled={medicine.stock === 0 || cart.some(item => item.id === (medicine.id || medicine['Medicine name']))}
-              sx={{
-                borderRadius: 2,
-                py: 1,
-                boxShadow: 2,
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                  transition: 'transform 0.2s'
-                }
-              }}
-            >
-              {cart.some(item => item.id === (medicine.id || medicine['Medicine name'])) ? 'Added to Cart' : 'Add to Cart'}
-            </Button>
+          </CardContent>          <Box sx={{ p: 2, pt: 0 }}>
+            {(() => {
+              const medicineId = medicine.id || medicine['Medicine name'];
+              const cartItem = cart.find(item => item.id === medicineId);
+              
+              if (cartItem) {
+                // Show quantity controls when item is in cart
+                return (
+                  <Box>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'space-between',
+                      bgcolor: 'primary.main',
+                      borderRadius: 2,
+                      p: 1,
+                      color: 'white',
+                      mb: 1
+                    }}>
+                      <IconButton
+                        size="small"
+                        onClick={() => updateQuantity(medicineId, cartItem.quantity - 1)}
+                        disabled={cartItem.quantity <= 1}
+                        sx={{ 
+                          color: 'white',
+                          bgcolor: 'rgba(255,255,255,0.2)',
+                          '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' },
+                          '&:disabled': { color: 'rgba(255,255,255,0.5)' }
+                        }}
+                      >
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', lineHeight: 1 }}>-</Typography>
+                      </IconButton>
+                      
+                      <Box sx={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center',
+                        minWidth: '80px'
+                      }}>
+                        <Typography variant="body2" sx={{ fontSize: '0.75rem', opacity: 0.9 }}>
+                          Quantity
+                        </Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                          {cartItem.quantity}
+                        </Typography>
+                      </Box>
+                      
+                      <IconButton
+                        size="small"
+                        onClick={() => updateQuantity(medicineId, cartItem.quantity + 1)}
+                        disabled={cartItem.quantity >= medicine.stock}
+                        sx={{ 
+                          color: 'white',
+                          bgcolor: 'rgba(255,255,255,0.2)',
+                          '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' },
+                          '&:disabled': { color: 'rgba(255,255,255,0.5)' }
+                        }}
+                      >
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', lineHeight: 1 }}>+</Typography>
+                      </IconButton>
+                    </Box>
+                    
+                    <Button
+                      fullWidth
+                      size="small"
+                      variant="outlined"
+                      color="error"
+                      onClick={() => removeFromCart(medicineId)}
+                      sx={{
+                        borderRadius: 1,
+                        py: 0.5,
+                        fontSize: '0.75rem'
+                      }}
+                    >
+                      Remove from Cart
+                    </Button>
+                  </Box>
+                );
+              } else {
+                // Show Add to Cart button when item is not in cart
+                return (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={() => addToCart(medicine)}
+                    disabled={medicine.stock === 0}
+                    sx={{
+                      borderRadius: 2,
+                      py: 1,
+                      boxShadow: 2,
+                      '&:hover': {
+                        transform: 'scale(1.02)',
+                        transition: 'transform 0.2s'
+                      }
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                );
+              }
+            })()}
           </Box>
         </Card>
       </Grid>
