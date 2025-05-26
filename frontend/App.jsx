@@ -14,7 +14,7 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "healthpix-63617",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "healthpix-63617.appspot.com",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "275934394685",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:275934394685:web:YOUR_APP_ID"
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:275934394685:web:4f8b9c2a1e5d7f3a8b9c2e5d"
 };
 
 // Initialize Firebase
