@@ -11,24 +11,14 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true
       }
-    },
-    hmr: {
-      overlay: false
     }
   },
   build: {
     sourcemap: false,
-    target: 'esnext',
-    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: undefined
       }
-    }
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      target: 'esnext'
     }
   }
 })
