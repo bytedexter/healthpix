@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 const slides = [
   {
@@ -82,10 +83,12 @@ export default function ImageSlideshow() {
             transition={{ delay: 0.4 }}
             className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center"
           >
-            <img
+            <Image
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
-              className="w-16 h-16 object-contain"
+              width={600}
+              height={300}
+              className="w-full h-72 object-cover rounded-lg"
             />
           </motion.div>
         </motion.div>

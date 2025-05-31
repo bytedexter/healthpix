@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { apiService, type Order } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import Image from 'next/image';
 
 interface HistoryProps {
   onBack: () => void;
@@ -165,11 +166,7 @@ export default function History({ onBack }: HistoryProps) {
                         <div className="flex items-center space-x-4 overflow-x-auto pb-2">
                           {order.items.map((item, index) => (
                             <div key={index} className="flex-shrink-0 flex items-center space-x-3 bg-gray-50 dark:bg-gray-700 rounded-lg p-3 min-w-[200px]">
-                              <img
-                                src={item.image}
-                                alt={item.medicineName}
-                                className="w-12 h-12 rounded-lg object-cover"
-                              />
+                              <Image src={item.image} alt={item.medicineName} width={48} height={48} className="w-12 h-12 object-contain" />
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{item.medicineName}</p>
                                 <p className="text-xs text-gray-600 dark:text-gray-400">Qty: {item.quantity}</p>

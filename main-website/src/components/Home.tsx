@@ -35,6 +35,7 @@ import Checkout from './Checkout';
 import Medicines from './Medicines';
 import { analyzeImageForMedicines, type ImageAnalysisResult } from '@/lib/gemini';
 import { apiService, type Medicine } from '@/lib/api';
+import Image from 'next/image';
 
 type CurrentView = 'home' | 'medicines' | 'orders' | 'history' | 'profile' | 'checkout';
 
@@ -64,7 +65,6 @@ export default function Home() {
   
   // Update categories to match CSV data structure  
   const categories = ['All', 'Pain Relief', 'Allergy', 'Diabetes', 'Gastric', 'Topical', 'Antibiotics', 'Gastrointestinal'];
-
   // Load medicines from API
   useEffect(() => {
     if (currentView === 'home') {
@@ -75,17 +75,32 @@ export default function Home() {
             selectedCategory !== 'All' ? selectedCategory : undefined,
             searchQuery || undefined
           );
-          if (response.success && response.data) {
+          
+          if (response.success && response.data && Array.isArray(response.data)) {
             // Mark all medicines as in stock for this implementation
             const updatedMedicines = response.data.map(medicine => ({
               ...medicine,
-              inStock: true,
+              inStock: medicine.inStock ?? true,
               stock: medicine.stock || Math.floor(Math.random() * 50) + 10
             }));
             setMedicines(updatedMedicines);
+          } else {
+            console.error('Invalid medicines data received:', response);
+            // Use fallback data if API fails
+            setMedicines([
+              { id: '1', name: 'Paracetamol', type: 'Tablet', dosage: '500mg', composition: 'Acetaminophen', price: 15, rating: 4.5, category: 'Pain Relief', image: '/health.png', inStock: true },
+              { id: '2', name: 'Cetirizine', type: 'Tablet', dosage: '10mg', composition: 'Cetirizine HCl', price: 25, rating: 4.2, category: 'Allergy', image: '/health.png', inStock: true },
+              { id: '3', name: 'Ibuprofen', type: 'Tablet', dosage: '200mg', composition: 'Ibuprofen', price: 18, rating: 4.3, category: 'Pain Relief', image: '/health.png', inStock: true },
+            ]);
           }
         } catch (error) {
           console.error('Failed to load medicines:', error);
+          // Use fallback data if API fails
+          setMedicines([
+            { id: '1', name: 'Paracetamol', type: 'Tablet', dosage: '500mg', composition: 'Acetaminophen', price: 15, rating: 4.5, category: 'Pain Relief', image: '/health.png', inStock: true },
+            { id: '2', name: 'Cetirizine', type: 'Tablet', dosage: '10mg', composition: 'Cetirizine HCl', price: 25, rating: 4.2, category: 'Allergy', image: '/health.png', inStock: true },
+            { id: '3', name: 'Ibuprofen', type: 'Tablet', dosage: '200mg', composition: 'Ibuprofen', price: 18, rating: 4.3, category: 'Pain Relief', image: '/health.png', inStock: true },
+          ]);
         } finally {
           setIsLoadingMedicines(false);
         }
@@ -367,10 +382,12 @@ export default function Home() {
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg dark:hover:shadow-xl transition-shadow"
               >
                 <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                  <img
+                  <Image
                     src="/temp.png"
                     alt={medicine.name}
-                    className="w-full h-full object-cover"
+                    width={80}
+                    height={80}
+                    className="w-20 h-20 object-contain"
                   />
                 </div>
                 
@@ -449,7 +466,7 @@ export default function Home() {
                 <Menu className="w-6 h-6" />
               </button>
               <div className="flex items-center ml-4 lg:ml-0">
-                <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                 <h1 className="ml-3 text-xl font-bold text-gray-900 dark:text-white">Clinicado</h1>
               </div>
             </div>
@@ -614,7 +631,7 @@ export default function Home() {
               <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                    <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                     <h2 className="ml-3 text-lg font-semibold text-gray-900 dark:text-white">Clinicado</h2>
                   </div>
                   <button
@@ -765,7 +782,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                  <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                   <h3 className="ml-3 text-xl font-bold">Clinicado</h3>
                 </div>
                 <p className="text-gray-400 dark:text-gray-500">

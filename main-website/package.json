@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:standard": "next dev",
     "build": "next build",
+    "build:turbo": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
     "clean": "rimraf .next",

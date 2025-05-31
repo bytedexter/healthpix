@@ -4,7 +4,9 @@ const API_BASE_URL = 'https://healthpix-3c036-default-rtdb.firebaseio.com';
 // Fallback data flag - set to true to always use fallback data for development
 const USE_FALLBACK_DATA = false;
 
-// Default set of medicines for fallback
+// Default set of medicines for fallback - can be used directly or as a reference
+// These are example medicines that match the structure needed by the application
+/*
 const FALLBACK_MEDICINES: Medicine[] = [
   {
     id: '1',
@@ -55,6 +57,7 @@ const FALLBACK_MEDICINES: Medicine[] = [
     expiryDate: '2025-09-20'
   }
 ];
+*/
 
 export interface ApiResponse<T> {
   success: boolean;

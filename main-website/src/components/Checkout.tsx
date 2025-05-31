@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiService } from '@/lib/api';
+import Image from 'next/image';
 
 interface CartItem {
   id: string;
@@ -208,7 +209,7 @@ export default function Checkout({ cartItems, onUpdateQuantity, onRemoveItem, on
       <div className="space-y-4">
         {cartItems.map((item) => (
           <div key={item.id} className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />            <div className="flex-1">
+            <Image src={item.image} alt={item.name} width={64} height={64} className="w-16 h-16 object-contain" />            <div className="flex-1">
               <h4 className="font-medium text-gray-900 dark:text-white">{item.name}</h4>
               <p className="text-sm text-gray-500 dark:text-gray-400">{item.type} • {item.dosage}</p>
               <p className="text-lg font-semibold text-gray-900 dark:text-white">₹{item.price}</p>

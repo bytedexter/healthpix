@@ -24,6 +24,7 @@ import {
   History as HistoryIcon,
   Home as HomeIcon
 } from 'lucide-react';
+import Image from 'next/image';
 import ImageSlideshow from './ImageSlideshow';
 import Chatbot from './Chatbot';
 import Orders from './Orders';
@@ -328,9 +329,11 @@ export default function Home() {
                 className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
               >
                 <div className="aspect-square bg-gray-100 flex items-center justify-center">
-                  <img
+                  <Image
                     src={medicine.image}
                     alt={medicine.name}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 object-contain"
                   />
                 </div>
@@ -385,7 +388,7 @@ export default function Home() {
                 <Menu className="w-6 h-6" />
               </button>
               <div className="flex items-center ml-4 lg:ml-0">
-                <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                 <h1 className="ml-3 text-xl font-bold text-gray-900">Clinicado</h1>
               </div>
             </div>
@@ -541,7 +544,7 @@ export default function Home() {
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                    <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                     <h2 className="ml-3 text-lg font-semibold text-gray-900">Clinicado</h2>
                   </div>
                   <button
@@ -668,7 +671,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <img src="/log.jpg" alt="Clinicado" className="w-8 h-8 rounded-full object-cover" />
+                  <Image src="/log.jpg" alt="Clinicado" width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                   <h3 className="ml-3 text-xl font-bold">Clinicado</h3>
                 </div>
                 <p className="text-gray-400">

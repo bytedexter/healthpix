@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { apiService, type Medicine } from '@/lib/api';
 import { analyzeImageForMedicines, type ImageAnalysisResult } from '@/lib/gemini';
+import Image from 'next/image';
 
 interface MedicinesProps {
   onBack: () => void;
@@ -321,10 +322,12 @@ export default function Medicines({ onBack, cart, addToCart, updateCartItemQuant
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg dark:hover:shadow-xl transition-shadow"
                 >
                   <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                    <img
+                    <Image
                       src={medicine.image}
                       alt={medicine.name}
-                      className="w-20 h-20 object-contain"
+                      width={84}
+                      height={84}
+                      className="w-21 h-21 object-contain"
                     />
                   </div>
                   
