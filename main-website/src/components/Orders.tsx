@@ -15,14 +15,12 @@ import {
 } from 'lucide-react';
 import { apiService, type Order } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 
 interface OrdersProps {
   onBack: () => void;
 }
 
 export default function Orders({ onBack }: OrdersProps) {
-  const { isDarkMode } = useTheme();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
@@ -182,7 +180,7 @@ export default function Orders({ onBack }: OrdersProps) {
             className="text-center py-12"
           >            <Package className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No orders found</h3>
-            <p className="text-gray-600 dark:text-gray-400">You haven't placed any orders yet.</p>
+            <p className="text-gray-600 dark:text-gray-400">You haven&apos;t placed any orders yet.</p>
           </motion.div>
         ) : (
           <div className="space-y-4">

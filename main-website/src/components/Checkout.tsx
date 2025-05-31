@@ -1,12 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, 
   MapPin, 
-  Phone, 
-  User, 
   CreditCard, 
   Truck, 
   CheckCircle, 
@@ -15,10 +12,8 @@ import {
   Minus,
   X,
   Smartphone,
-  Building2,
-  Wallet
+  Building2
 } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiService } from '@/lib/api';
 
@@ -53,7 +48,6 @@ interface CheckoutProps {
 }
 
 export default function Checkout({ cartItems, onUpdateQuantity, onRemoveItem, onBack, onOrderComplete }: CheckoutProps) {
-  const { isDarkMode } = useTheme();
   const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedAddress, setSelectedAddress] = useState<string>('');
@@ -137,24 +131,25 @@ export default function Checkout({ cartItems, onUpdateQuantity, onRemoveItem, on
 
     try {      // Prepare order data
       const orderData = {
-        userId: user.uid,
-        customerName: selectedAddr.name,
+        userId: user.uid,        customerName: selectedAddr.name,
         customerEmail: user.email || 'customer@healthpix.com',
         items: cartItems.map(item => ({
+          medicineId: item.id,
           medicineName: item.name,
           quantity: item.quantity,
           price: item.price,
           image: item.image
-        })),
-        totalAmount: finalAmount,
+        })),        totalAmount: finalAmount,
         status: 'placed' as const,
         paymentMethod: selectedPayment,
         shippingAddress: {
-          street: selectedAddr.addressLine1 + (selectedAddr.addressLine2 ? ', ' + selectedAddr.addressLine2 : ''),
+          fullName: selectedAddr.name,
+          phone: selectedAddr.phone,
+          addressLine1: selectedAddr.addressLine1,
+          addressLine2: selectedAddr.addressLine2,
           city: selectedAddr.city,
           state: selectedAddr.state,
-          zipCode: selectedAddr.pincode,
-          country: 'India'
+          pincode: selectedAddr.pincode
         }
       };
 

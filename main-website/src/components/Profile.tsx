@@ -12,10 +12,10 @@ import {
   Save, 
   X,
   Plus,
-  Trash2
+  Trash2,
+  LogOut
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 import { apiService, type User as UserType, type Address } from '@/lib/api';
 
 interface ProfileProps {
@@ -23,13 +23,10 @@ interface ProfileProps {
 }
 
 export default function Profile({ onBack }: ProfileProps) {
-  const { isDarkMode } = useTheme();
   const [userProfile, setUserProfile] = useState<UserType | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [isLoading, setIsLoading] = useState(true);  const [isEditing, setIsEditing] = useState(false);
   const [showAddAddress, setShowAddAddress] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -106,10 +103,18 @@ export default function Profile({ onBack }: ProfileProps) {
           landmark: ''
         });
       }
-    } catch (error) {
-      console.error('Failed to add address:', error);
+    } catch (error) {      console.error('Failed to add address:', error);
     }
   };
+
+  const handleSignOut = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
@@ -280,9 +285,27 @@ export default function Profile({ onBack }: ProfileProps) {
             <div className="text-center py-8">
               <MapPin className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-3" />
               <p className="text-gray-600 dark:text-gray-400">No addresses saved yet</p>
-            </div>
-          )}
-        </motion.div>        {/* Add Address Modal */}
+            </div>          )}
+        </motion.div>
+
+        {/* Sign Out Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 mb-6"
+        >
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Account Actions</h3>
+          <button
+            onClick={handleSignOut}
+            className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 transition-colors"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Sign Out</span>
+          </button>
+        </motion.div>
+
+        {/* Add Address Modal */}
         {showAddAddress && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <motion.div

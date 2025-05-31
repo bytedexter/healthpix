@@ -655,12 +655,10 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Conditional Content Based on Current View */}
-        {currentView === 'home' && renderHomeContent()}
-        {currentView === 'orders' && <Orders />}
-        {currentView === 'history' && <History />}
-        {currentView === 'profile' && <Profile />}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        {/* Conditional Content Based on Current View */}        {currentView === 'home' && renderHomeContent()}
+        {currentView === 'orders' && <Orders onBack={() => setCurrentView('home')} />}
+        {currentView === 'history' && <History onBack={() => setCurrentView('home')} />}
+        {currentView === 'profile' && <Profile onBack={() => setCurrentView('home')} />}
       </div>
 
       {/* Footer - Only show on home view */}

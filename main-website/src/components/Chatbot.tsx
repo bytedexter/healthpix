@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Bot, User, Camera, Upload, Loader2 } from 'lucide-react';
 import { analyzePrescriptionImage } from '@/lib/gemini';
-import { useTheme } from '@/contexts/ThemeContext';
 
 interface Message {
   id: string;
@@ -37,7 +36,6 @@ const botResponses: Record<string, string> = {
 };
 
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
-  const { isDarkMode } = useTheme();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',

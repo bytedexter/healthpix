@@ -13,14 +13,12 @@ import {
 } from 'lucide-react';
 import { apiService, type Order } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 
 interface HistoryProps {
   onBack: () => void;
 }
 
 export default function History({ onBack }: HistoryProps) {
-  const { isDarkMode } = useTheme();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
@@ -117,10 +115,9 @@ export default function History({ onBack }: HistoryProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
-          >
-            <Package className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          >            <Package className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No order history</h3>
-            <p className="text-gray-600 dark:text-gray-400">You haven't placed any orders yet.</p>
+            <p className="text-gray-600 dark:text-gray-400">You haven&apos;t placed any orders yet.</p>
           </motion.div>
         ) : (
           <div className="space-y-8">

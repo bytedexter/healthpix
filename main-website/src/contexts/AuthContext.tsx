@@ -9,7 +9,10 @@ import {
   onAuthStateChanged,
   updateProfile,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  ConfirmationResult
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 
@@ -18,6 +21,8 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
+  loginWithPhone: (phoneNumber: string, recaptchaVerifier: RecaptchaVerifier) => Promise<ConfirmationResult>;
+  verifyPhoneCode: (confirmationResult: ConfirmationResult, code: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -57,12 +62,30 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
     }
   };
-
   const loginWithGoogle = async () => {
     setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loginWithPhone = async (phoneNumber: string, recaptchaVerifier: RecaptchaVerifier): Promise<ConfirmationResult> => {
+    setLoading(true);
+    try {
+      const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+      return confirmationResult;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyPhoneCode = async (confirmationResult: ConfirmationResult, code: string) => {
+    setLoading(true);
+    try {
+      await confirmationResult.confirm(code);
     } finally {
       setLoading(false);
     }
@@ -86,12 +109,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
     }
   };
-
   const value: AuthContextType = {
     user,
     loading,
     login,
     loginWithGoogle,
+    loginWithPhone,
+    verifyPhoneCode,
     register,
     logout,
   };

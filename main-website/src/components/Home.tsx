@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  LogOut, 
   Search, 
   ShoppingCart, 
   Heart, 
@@ -34,10 +32,11 @@ import Orders from './Orders';
 import History from './History';
 import Profile from './Profile';
 import Checkout from './Checkout';
+import Medicines from './Medicines';
 import { analyzeImageForMedicines, type ImageAnalysisResult } from '@/lib/gemini';
 import { apiService, type Medicine } from '@/lib/api';
 
-type CurrentView = 'home' | 'orders' | 'history' | 'profile' | 'checkout';
+type CurrentView = 'home' | 'medicines' | 'orders' | 'history' | 'profile' | 'checkout';
 
 interface CartItem {
   id: string;
@@ -60,9 +59,7 @@ export default function Home() {
   const [showChatbot, setShowChatbot] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showCameraOptions, setShowCameraOptions] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<ImageAnalysisResult | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { logout } = useAuth();
+  const [analysisResult, setAnalysisResult] = useState<ImageAnalysisResult | null>(null);  const fileInputRef = useRef<HTMLInputElement>(null);
   const { isDarkMode, toggleDarkMode } = useTheme();
   
   // Update categories to match CSV data structure  
@@ -107,17 +104,8 @@ export default function Home() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showCameraOptions]);
+    return () => document.removeEventListener('mousedown', handleClickOutside);  }, [showCameraOptions]);
 
-  const handleSignOut = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
-  
   const addToCart = (medicine: Medicine) => {
     setCart(prev => {
       const existingItem = prev.find(item => item.id === medicine.id);
@@ -152,11 +140,9 @@ export default function Home() {
   };
 
   const removeFromCart = (id: string) => {
-    setCart(prev => prev.filter(item => item.id !== id));
-  };
+    setCart(prev => prev.filter(item => item.id !== id));  };
 
   const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0);
-  const getTotalPrice = () => cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   const handleImageUpload = async (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -502,17 +488,16 @@ export default function Home() {
                 >
                   <HistoryIcon className="w-5 h-5" />
                   <span>History</span>
-                </button>
-                <button
-                  onClick={() => setCurrentView('profile')}
+                </button>                <button
+                  onClick={() => setCurrentView('medicines')}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                    currentView === 'profile' 
+                    currentView === 'medicines' 
                       ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
                       : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
-                  <User className="w-5 h-5" />
-                  <span>Profile</span>
+                  <Pill className="w-5 h-5" />
+                  <span>Medicines</span>
                 </button>
               </div>              {/* Search Bar - Only show on home view */}
               {currentView === 'home' && (
@@ -595,13 +580,16 @@ export default function Home() {
                   </span>
                 )}
               </button>
-              
-              <button
-                onClick={handleSignOut}
-                className="flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                <button
+                onClick={() => setCurrentView('profile')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                  currentView === 'profile' 
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
               >
-                <LogOut className="w-5 h-5" />
-                <span>Sign Out</span>
+                <User className="w-5 h-5" />
+                <span>Profile</span>
               </button>
             </div>
           </div>
@@ -681,20 +669,19 @@ export default function Home() {
                   >
                     <HistoryIcon className="w-5 h-5" />
                     <span>History</span>
-                  </button>
-                  <button
+                  </button>                  <button
                     onClick={() => {
-                      setCurrentView('profile');
+                      setCurrentView('medicines');
                       setIsSidebarOpen(false);
                     }}
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
-                      currentView === 'profile' 
+                      currentView === 'medicines' 
                         ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
                         : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
-                    <User className="w-5 h-5" />
-                    <span>Profile</span>
+                    <Pill className="w-5 h-5" />
+                    <span>Medicines</span>
                   </button>
                 </div>
 
@@ -724,13 +711,19 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-                
-                <button
-                  onClick={handleSignOut}
-                  className="w-full flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  <button
+                  onClick={() => {
+                    setCurrentView('profile');
+                    setIsSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                    currentView === 'profile' 
+                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
                 >
-                  <LogOut className="w-5 h-5" />
-                  <span>Sign Out</span>
+                  <User className="w-5 h-5" />
+                  <span>Profile</span>
                 </button>
               </div>
             </motion.div>
@@ -739,9 +732,16 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Conditional Content Based on Current View */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        {/* Conditional Content Based on Current View */}
         {currentView === 'home' && renderHomeContent()}
+        {currentView === 'medicines' && (
+          <Medicines 
+            onBack={() => setCurrentView('home')}
+            cart={cart}
+            addToCart={addToCart}
+            updateCartItemQuantity={updateCartItemQuantity}
+          />
+        )}
         {currentView === 'orders' && <Orders onBack={() => setCurrentView('home')} />}
         {currentView === 'history' && <History onBack={() => setCurrentView('home')} />}
         {currentView === 'profile' && <Profile onBack={() => setCurrentView('home')} />}

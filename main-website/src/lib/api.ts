@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://healthpix-backend-env.eba-dkmy2f3p.ap-south-1.elasticbeanstalk.com';
 
 export interface ApiResponse<T> {
   success: boolean;
