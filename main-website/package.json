@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rimraf .next",
+    "prebuild": "npm run clean"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -32,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "postcss": "^8.4.47",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.16",
     "typescript": "^5"
   }
