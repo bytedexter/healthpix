@@ -1,4 +1,9 @@
-const API_BASE_URL = 'http://healthpix-backend-env.eba-dkmy2f3p.ap-south-1.elasticbeanstalk.com/api';
+// Backend API configuration
+const BACKEND_URL = 'http://healthpix-backend-env.eba-dkmy2f3p.ap-south-1.elasticbeanstalk.com/api';
+
+// For development, connect directly to backend
+// For production, we'll need to deploy admin dashboard to HTTP or configure HTTPS on backend
+const API_BASE_URL = BACKEND_URL;
 
 export interface Order {
   id: string;
@@ -42,17 +47,29 @@ class AdminApiService {  async login(credentials: AdminLoginCredentials): Promis
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest', // Required by some CORS proxies
         },
         body: JSON.stringify(credentials),
       });
 
       console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Error response:', errorText);
+        return { success: false, message: `HTTP ${response.status}: ${errorText}` };
+      }
+      
       const data = await response.json();
       console.log('Response data:', data);
       return data;
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, message: 'Login failed' };
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        return { success: false, message: 'Network error: Cannot connect to backend. This may be due to CORS policy or the backend being unavailable.' };
+      }
+      return { success: false, message: `Login failed: ${error instanceof Error ? error.message : 'Unknown error'}` };
     }
   }
 
@@ -71,9 +88,7 @@ class AdminApiService {  async login(credentials: AdminLoginCredentials): Promis
       console.error('Get orders error:', error);
       return { success: false, message: 'Failed to fetch orders' };
     }
-  }
-
-  async updateOrderStatus(
+  }  async updateOrderStatus(
     orderId: string, 
     status: Order['status'], 
     trackingId?: string
