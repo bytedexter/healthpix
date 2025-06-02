@@ -2,6 +2,7 @@ const API_BASE_URL = 'http://healthpix-backend-env.eba-dkmy2f3p.ap-south-1.elast
 
 export interface Order {
   id: string;
+  _id?: string; // MongoDB document ID (optional for compatibility)
   userId: string;
   customerName: string;
   customerEmail: string;
