@@ -76,19 +76,18 @@ export default function ImageSlideshow() {
               {slides[currentSlide].subtitle}
             </motion.p>
           </div>
-          
-          <motion.div
+            <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
-            className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center"
+            className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center overflow-hidden"
           >
             <Image
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
-              width={600}
-              height={300}
-              className="w-full h-72 object-cover rounded-lg"
+              width={128}
+              height={128}
+              className="w-full h-full object-contain"
             />
           </motion.div>
         </motion.div>

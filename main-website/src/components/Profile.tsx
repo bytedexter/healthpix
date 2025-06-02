@@ -44,14 +44,15 @@ export default function Profile({ onBack }: ProfileProps) {
     pincode: '',
     landmark: ''
   });
-
   useEffect(() => {
     const loadProfile = async () => {
-      if (!user?.uid) return;
-      
       setIsLoading(true);
+      
+      // For demo purposes, use a default user ID if no user is logged in
+      const userId = user?.uid || 'demo-user-123';
+      
       try {
-        const response = await apiService.getUserProfile(user.uid);
+        const response = await apiService.getUserProfile(userId);
         if (response.success && response.data) {
           setUserProfile(response.data);
           setFormData({

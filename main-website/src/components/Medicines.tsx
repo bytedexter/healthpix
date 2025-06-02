@@ -320,14 +320,16 @@ export default function Medicines({ onBack, cart, addToCart, updateCartItemQuant
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg dark:hover:shadow-xl transition-shadow"
-                >
-                  <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                >                  <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-1">
                     <Image
-                      src={medicine.image}
+                      src={medicine.image || '/health.png'}
                       alt={medicine.name}
-                      width={84}
-                      height={84}
-                      className="w-21 h-21 object-contain"
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        e.currentTarget.src = '/health.png';
+                      }}
                     />
                   </div>
                   

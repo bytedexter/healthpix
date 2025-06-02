@@ -40,6 +40,7 @@ const Login = ({ onSwitchToRegister }: LoginProps) => {
   const [isOtpStep, setIsOtpStep] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
+  const [otpSent, setOtpSent] = useState(false);
   const { login, loginWithGoogle, loginWithPhone, verifyPhoneCode } = useAuth();
   
   const {
@@ -65,6 +66,8 @@ const Login = ({ onSwitchToRegister }: LoginProps) => {
   } = useForm<OtpFormData>({
     resolver: zodResolver(otpSchema),
   });
+
+  const BACKEND_URL = 'http://healthpix-backend-env.eba-dkmy2f3p.ap-south-1.elasticbeanstalk.com';
 
   // Set up reCAPTCHA verifier on component mount
   useEffect(() => {
@@ -151,6 +154,25 @@ const Login = ({ onSwitchToRegister }: LoginProps) => {
     }
   };
 
+  const handleSendEmailOtp = async (email: string) => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const res = await fetch(`${BACKEND_URL}/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.status !== 'success') throw new Error(data.message);
+      setOtpSent(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to send OTP');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const toggleLoginMethod = (method: 'email' | 'phone') => {
     setLoginMethod(method);
     setError('');
@@ -224,6 +246,14 @@ const Login = ({ onSwitchToRegister }: LoginProps) => {
                     placeholder="your@email.com"
                     disabled={isLoading}
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleSendEmailOtp((document.getElementById('email') as HTMLInputElement)?.value)}
+                    disabled={isLoading}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs"
+                  >
+                    {otpSent ? 'OTP Sent' : isLoading ? 'Sending...' : 'Send OTP'}
+                  </button>
                 </div>
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>

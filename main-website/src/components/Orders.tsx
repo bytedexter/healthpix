@@ -44,17 +44,14 @@ export default function Orders({ onBack }: OrdersProps) {
     cancelled: CheckCircle
   };  useEffect(() => {
     const loadOrders = async () => {
-      if (!user?.uid) {
-        console.log('No user found, user:', user);
-        setIsLoading(false);
-        return;
-      }
-      
-      console.log('Loading orders for user:', user.uid);
+      console.log('Loading orders, user:', user);
       setIsLoading(true);
       
+      // For demo purposes, use a default user ID if no user is logged in
+      const userId = user?.uid || 'demo-user-123';
+      
       try {
-        const response = await apiService.getOrders(user.uid);
+        const response = await apiService.getOrders(userId);
         console.log('Orders API response:', response);
         
         if (response.success && response.data) {
@@ -64,40 +61,13 @@ export default function Orders({ onBack }: OrdersProps) {
           setOrders(ordersData);
         } else {
           console.error('Invalid orders data received:', response);
-          // Set empty array instead of null to avoid rendering issues
+          // Set empty array and let the API service handle fallback
           setOrders([]);
         }
       } catch (error) {
         console.error('Failed to load orders:', error);
-        // Use fallback demo orders if API fails
-        setOrders([
-          {
-            id: 'demo1',
-            userId: user.uid,
-            items: [
-              {
-                medicineId: '1',
-                medicineName: 'Paracetamol',
-                quantity: 2,
-                price: 15,
-                image: '/health.png'
-              }
-            ],
-            totalAmount: 30,
-            status: 'delivered',
-            paymentMethod: 'cod',
-            shippingAddress: {
-              fullName: 'Demo User',
-              phone: '1234567890',
-              addressLine1: '123 Demo Street',
-              city: 'Demo City',
-              state: 'Demo State',
-              pincode: '123456'
-            },
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          }
-        ]);
+        // The API service should have returned fallback orders, but just in case
+        setOrders([]);
       } finally {
         setIsLoading(false);
       }
