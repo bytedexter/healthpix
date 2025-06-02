@@ -1,0 +1,29 @@
+version: 1
+environment:
+  variables:
+    NODE_VERSION: '18'
+    NPM_CONFIG_UNSAFE_PERM: 'true'
+    AMPLIFY_DIFF_DEPLOY: false
+    AMPLIFY_MONOREPO_APP_ROOT: main-website
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Node version:"
+        - node --version
+        - echo "NPM version:"
+        - npm --version
+        - echo "Installing dependencies..."
+        - npm ci
+    build:
+      commands:
+        - echo "Building the app..."
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
